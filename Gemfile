@@ -8,6 +8,7 @@ gemspec
 version = ENV['RAILS_VERSION'] || '8.0'
 gem 'rails', "~> #{version}.0"
 
+gem 'actioncable'
 gem 'bundler', '~> 2.0'
 gem 'debug'
 gem 'generator_spec', '~> 0.10'

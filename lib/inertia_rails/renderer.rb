@@ -13,7 +13,8 @@ module InertiaRails
       :props,
       :view_data,
       :encrypt_history,
-      :clear_history
+      :clear_history,
+      :stream
     )
 
     def initialize(component, controller, request, response, render_method, **options)
@@ -33,6 +34,7 @@ module InertiaRails
       @deep_merge = options.fetch(:deep_merge, configuration.deep_merge_shared_data)
       @encrypt_history = options.fetch(:encrypt_history, configuration.encrypt_history)
       @clear_history = options.fetch(:clear_history, controller.session[:inertia_clear_history] || false)
+      @stream = options.fetch(:stream, nil)
       @controller.instance_variable_set('@_inertia_rendering', true)
       controller.inertia_meta.add(options[:meta]) if options[:meta]
     end
@@ -114,6 +116,7 @@ module InertiaRails
         version: configuration.version,
         encryptHistory: encrypt_history,
         clearHistory: clear_history,
+        stream: stream,
       }
 
       deferred_props = deferred_props_keys
